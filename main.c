@@ -14,8 +14,8 @@
 #define 	BRILLO_LCD 		80; 	// BRILLO DEL LCD ENTRE 0 MIN - 255 MAX, BRILLO.
 #define 	CONTRASTE_LCD	125;	// CONTRASTE DE LCD 0 MIN - 255 MAX, CONTRASTE.
 
-#define CFM_IPS_FLASH_ADDR 		0x44000000			// DIRECCIÓN DE INICIO DE ALMACENAJE EN FLASH.
-#define FLASH_START_ADDRESS	 	CFM_IPS_FLASH_ADDR	// DIRECCIÓN DE INICIO DE ALMACENAJE EN FLASH.
+#define CFM_IPS_FLASH_ADDR 		0x44000000			// DIRECCIÃ“N DE INICIO DE ALMACENAJE EN FLASH.
+#define FLASH_START_ADDRESS	 	CFM_IPS_FLASH_ADDR	// DIRECCIÃ“N DE INICIO DE ALMACENAJE EN FLASH.
 
 
 // VARIABLES DEL PROGRAMA
@@ -92,7 +92,7 @@ struct DATO_dup DATO_t; // para respaldar huella encriptada
 */
 
 struct POSICION {
- unsigned short int CAR[950]; // guarda posision //* short usa 2 bytes en lugar de 4
+ unsigned short int CAR[950]; // guarda posicion //* short usa 2 bytes en lugar de 4
  };
 struct POSICION POSS;
 
@@ -118,7 +118,7 @@ void RELAY_ON_OFF(unsigned char ACTIVIDAD4);
 
 /* FUNCIONES DE VISUALIZACION EN LCD */
 void VIS_INICIO();
-//void VIS_SW_MENU_1(void);		// VISUALIZA FUNCION DEL SWITCHES DENTRO DE MENÚ.
+//void VIS_SW_MENU_1(void);		// VISUALIZA FUNCION DEL SWITCHES DENTRO DE MENÃš.
 void VIS_MENU_INICIAL(void); 	// visualiza menu para iniciar programa
 void VIS_INICIO_AGREG_USU(void);// VISUALIZA INICIO CUANDO SE DE DE ALTA UN USUARIO
 void VIS_ERROR();				// VISUALIZA MENSAJE DE ERROR, que algo salio mal en el codigo
@@ -141,8 +141,8 @@ void DET_CI(); 	// Determinar valores para Mapeo Log 2D a partir de la llave 32 
 /* FUNCIONES PARA MEMORIA FLASH */
 void INIC_MEMORIA_FLASH(void);			// INICIALIZA MEMORIA FLASH.
 void ESCRIBIR_DATO_FLASH(unsigned int DIREC_MEMORIA, unsigned int DATO_F);// ESCRIBE DATO DE 32 BITS EN FLASH.
-void RECUPERAR_DATO_FLASH(unsigned int DIREC_MEMORIA);// RECUPERA UN DATO DE FLASH DE LA DIRECCIÓN INDICADA.
-void BORRAR_DATO_FLASH(unsigned int DIREC_MEMORIA);// BORRA UN DATO DE FLASH DE LA DERECCIÓN INIDICADA.
+void RECUPERAR_DATO_FLASH(unsigned int DIREC_MEMORIA);// RECUPERA UN DATO DE FLASH DE LA DIRECCIÃ“N INDICADA.
+void BORRAR_DATO_FLASH(unsigned int DIREC_MEMORIA);// BORRA UN DATO DE FLASH DE LA DERECCIÃ“N INIDICADA.
 void BORRAR_DATOS_FLASH(void);					// BORRA MAS DE UN DATO DE LA FLASH.
 void ENCRIPTAR(void); // hace todos los procesos necesarios para encriptar templete y guardar en flash
 void DESENCRIPTAR(void); // hace el proceso de desencriptar templete de la flash y guarda en RAM
@@ -349,7 +349,7 @@ for(;;)
 	} // termina el IF de que han presionado el boton SW1
 	
 	// Para el SW2 ya se debe tener un usuario guardado antes, si no mando un mensaje de error
-	if (MCF_EPORT_EPFR & MCF_EPORT_EPFR_EPF7) // Verificar que el usuario que desea entrar esté registrado
+	if (MCF_EPORT_EPFR & MCF_EPORT_EPFR_EPF7) // Verificar que el usuario que desea entrar estÃ© registrado
 	{
 		LED_VERDE_ON_OFF(0x57);
 		BUZZER_ON_OFF(0x57); // enciende buzzer
@@ -401,7 +401,7 @@ for(;;)
 			}
 			// verifica muestra actual con templete en RAM1 del FAM	
 			MCF_GPIO_PORTTC = 1;
-			if(R_BYTE_ERROR == 0x40) // si no detectó huella en 10 segundos no va entrar
+			if(R_BYTE_ERROR == 0x40) // si no detectÃ³ huella en 10 segundos no va entrar
 			{
 				get_image(); // captura una imagen
 				MCF_GPIO_PORTTC = 3;
@@ -409,7 +409,7 @@ for(;;)
 				{
 					process_image(); // convierte la  imagen en una muestra
 					MCF_GPIO_PORTTC = 7;
-					if(R_BYTE_ERROR == 0x40) // entra solo cuando la muestra esté lista para comparar
+					if(R_BYTE_ERROR == 0x40) // entra solo cuando la muestra estÃ© lista para comparar
 					{	
 						verificacion(); //funcion que hace la verificacion entre la muestra actual y el templete de la RAM1
 										// debe haber primero una muestra en la RAM1 del FAM para que funcione
@@ -452,7 +452,7 @@ for(;;)
 			} // Capturar imagen
 			else // en caso de que no se envie el templete al lector para hacer la comparacion despues
 			{
-				MCF_GPIO_PORTTC=12; // no envió el templete a verificar
+				MCF_GPIO_PORTTC=12; // no enviÃ³ el templete a verificar
 				I2C_FUCNIONES_LCD(0x58);
 				I2C_POSICION_CARACTER(1,1);
 				VIS_ERROR(); //
@@ -989,7 +989,7 @@ void templete_a_FAM_RAM()
     while (!(MCF_UART_USR(0) & MCF_UART_USR_TXRDY)){};/* Wait until space is available in the FIFO */
     MCF_UART0_UTB = 0x0D; /* Send the character */ // FIN PAQUETE
     
-	// despues de enviar el templete, ahora nos envia info el FAM para ver si lo recibió bien
+	// despues de enviar el templete, ahora nos envia info el FAM para ver si lo recibiÃ³ bien
 	
 	// RECIBIR DEL LECTOR DE HUELLA 13 BYTES
 	while (!(MCF_UART_USR(0) & MCF_UART_USR_RXRDY)){};
@@ -1840,7 +1840,7 @@ void VIS_OK()
 	// **********************************************
 	for(i=0;i<LONG_MUES;i++) // LONG_TXT, 2072; desde 0 a 2071 = 2072 diferentes
 	{
-		V_SUM = DAT_CAOTX1.CAR[i] * (LONG_MUES-1) + 0.5; // +1**; // 2071 *¿? el +1 causa error en variable BUS y PERM.CAR
+		V_SUM = DAT_CAOTX1.CAR[i] * (LONG_MUES-1) + 0.5; // +1**; // 2071 *Â¿? el +1 causa error en variable BUS y PERM.CAR
 	//	V_SUM = DAT_CAOTX1.CAR[2099+1-LONG_MUES+i] * (LONG_MUES-1) + 1 + 0.5; // El rango es para que. 699/muestra 2099/templete
    		// + 0.5 es para compensar el truncamiento
    		PERM.CAR[i] = V_SUM;
@@ -1969,7 +1969,7 @@ void VIS_OK()
 		X_DIFU = X_ALTE + TXT_SUM - V_SUM; // resta parte entera quedando decimales
 		
 		// X_REDO = round(X_DIFU * 255);
-		X_REDO = (X_DIFU * 255) + 0.5; //+1**¿? // suma 0.5 para compensar truncamiento
+		X_REDO = (X_DIFU * 255) + 0.5; //+1**Â¿? // suma 0.5 para compensar truncamiento
 			
 		// Proceso de PERMUTACION Y DIFUSION
 		
@@ -2164,7 +2164,7 @@ void INIC_MEMORIA_FLASH(void)
 	MCF_CFM_CFMCLKD |=
 	MCF_CFM_CFMCLKD_DIV(0x35) | MCF_CFM_CFMCLKD_PRDIV8; 
 
-	MCF_CFM_CFMPROT = 0x00; 	// DESACTIVA PROTECCIÓN DE FLASH.
+	MCF_CFM_CFMPROT = 0x00; 	// DESACTIVA PROTECCIÃ“N DE FLASH.
 	MCF_CFM_CFMUSTAT |= (MCF_CFM_CFMUSTAT_PVIOL|MCF_CFM_CFMUSTAT_ACCERR);//  LIMPIA ERRORES.
 	return;	// REGRESAR.
 }
@@ -2183,7 +2183,7 @@ void ESCRIBIR_DATO_FLASH(unsigned int DIREC_MEMORIA, unsigned int DATO_F)
 
 void RECUPERAR_DATO_FLASH(unsigned int DIREC_MEMORIA)
 {
-	DATO_RECU = (*(volatile vuint32 *)(FLASH_START_ADDRESS+DIREC_MEMORIA));// LEE EL DATO EN LA DIRECCIÓN.
+	DATO_RECU = (*(volatile vuint32 *)(FLASH_START_ADDRESS+DIREC_MEMORIA));// LEE EL DATO EN LA DIRECCIÃ“N.
 	return;	// REGRESAR.
 }
 
@@ -2192,8 +2192,8 @@ void BORRAR_DATO_FLASH(unsigned int DIREC_MEMORIA)
 	MCF_CFM_CFMUSTAT = (MCF_CFM_CFMUSTAT_PVIOL | MCF_CFM_CFMUSTAT_ACCERR); // LIMPIAR ERRORES.
 	while (!(MCF_CFM_CFMUSTAT & MCF_CFM_CFMUSTAT_CBEIF)){};// ESPERAR HASTA QUE ESTE DISPONOBLE EL BUFER.
 
-	(*(volatile vuint32 *)(CFM_IPS_FLASH_ADDR+DIREC_MEMORIA)) =  -1;// APUNTA A UNA DIRECCIÓN DE MEMORIA.
-    MCF_CFM_CFMCMD = MCF_CFM_CFMCMD_PAGE_ERASE;						// ENVÍA COMANDO PARA BORRAR MEMORIA.
+	(*(volatile vuint32 *)(CFM_IPS_FLASH_ADDR+DIREC_MEMORIA)) =  -1;// APUNTA A UNA DIRECCIÃ“N DE MEMORIA.
+    MCF_CFM_CFMCMD = MCF_CFM_CFMCMD_PAGE_ERASE;						// ENVÃA COMANDO PARA BORRAR MEMORIA.
 
 	MCF_CFM_CFMUSTAT |= MCF_CFM_CFMUSTAT_CBEIF;						// LIMPIA BANDERA DE PROCESO TERMINADO.
 	return;	// REGRESAR.
@@ -2204,7 +2204,7 @@ void DESENCRIPTAR()
 	// inicia funcion de desencriptado, se reutilizan todos los vectores para ahorrar memoria
  	MCF_GPIO_PORTTC = 3; 
  	
- 	// recuperar Z, lee direccion 0x52060 ¿?
+ 	// recuperar Z, lee direccion 0x52060 Â¿?
  	RECUPERAR_DATO_FLASH(DIRE_ENC-4); // lee Z, el ULTIMO byte del criptograma 2072 iniciando desde 0 = 2073 Bytes
  	MOD_SUM2 = DATO_RECU; // guarda el valor para el resto del programa
  	TXT_SUM = MOD_SUM2 / 255; // valor a usar en el mapa caotico de 0 a 1
@@ -2273,7 +2273,7 @@ void DESENCRIPTAR()
 	// **********************************************
 	for(i=0;i<LONG_MUES;i++) // LONG_TXT, 2072; desde 0 a 2071 = 2072 diferentes
 	{
-		V_SUM = DAT_CAOTX1.CAR[i] * (LONG_MUES-1) + 0.5; // +1**; // 2071 *¿? el +1 causa error en variable BUS y PERM.CAR
+		V_SUM = DAT_CAOTX1.CAR[i] * (LONG_MUES-1) + 0.5; // +1**; // 2071 *Â¿? el +1 causa error en variable BUS y PERM.CAR
 	//	V_SUM = DAT_CAOTX1.CAR[2099+1-LONG_MUES+i] * (LONG_MUES-1) + 1 + 0.5; // El rango es para que. 699/muestra 2099/templete
    		// + 0.5 es para compensar el truncamiento
    		PERM.CAR[i] = V_SUM;
@@ -2369,7 +2369,7 @@ void DESENCRIPTAR()
 		X_ALTE = DAT_CAOTX1.CAR[i] * 100; // se elimino round; 04/04/17 borrado 2072-LONG_MUES por que siempre es 0
 		V_SUM = X_ALTE + TXT_SUM;//mod1 toma parte entera
 		X_DIFU = X_ALTE + TXT_SUM - V_SUM; // resta parte entera quedando decimales
-		X_REDO = X_DIFU * 255 + 0.5 ; //+1**¿? // suma 0.5 para compensar truncamiento, escala de 0 a 255
+		X_REDO = X_DIFU * 255 + 0.5 ; //+1**Â¿? // suma 0.5 para compensar truncamiento, escala de 0 a 255
 		
 		//**************************************************************************************
 		// Las modificaciones para DESENCRIPTAR son cambiar la suma del mapa caotico por una resta,
@@ -2424,8 +2424,8 @@ void BORRAR_DATOS_FLASH(void)
 		MCF_CFM_CFMUSTAT = (MCF_CFM_CFMUSTAT_PVIOL | MCF_CFM_CFMUSTAT_ACCERR); // LIMPIAR ERRORES.
 		while (!(MCF_CFM_CFMUSTAT & MCF_CFM_CFMUSTAT_CBEIF)){};// ESPERAR HASTA QUE ESTE DISPONOBLE EL BUFER.
 
-		(*(volatile vuint32 *)(CFM_IPS_FLASH_ADDR+DIREC_INICIAL)) =  -1;// APUNTA A UNA DIRECCIÓN DE MEMORIA.
-    	MCF_CFM_CFMCMD = MCF_CFM_CFMCMD_PAGE_ERASE;					// ENVÍA COMANDO PARA BORRAR MEMORIA.
+		(*(volatile vuint32 *)(CFM_IPS_FLASH_ADDR+DIREC_INICIAL)) =  -1;// APUNTA A UNA DIRECCIÃ“N DE MEMORIA.
+    	MCF_CFM_CFMCMD = MCF_CFM_CFMCMD_PAGE_ERASE;					// ENVÃA COMANDO PARA BORRAR MEMORIA.
     	MCF_CFM_CFMUSTAT |= MCF_CFM_CFMUSTAT_CBEIF;					// LIMPIA BANDERA DE PROCESO TERMINADO. 
 
 	  }
